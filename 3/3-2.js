@@ -23,5 +23,6 @@ const doTheDew = (input) => {
 
   return input.filter(loneClaim)
 }
-
+console.time('dew')
 console.log('Lone claim: ', doTheDew(input))
+console.timeEnd('dew')
