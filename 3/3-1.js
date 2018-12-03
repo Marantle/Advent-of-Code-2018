@@ -1,6 +1,6 @@
 // BEGIN boring part
 const fs = require('fs');
-const raw = fs.readFileSync(`${__dirname}/smallinput.txt`, 'utf8')
+const raw = fs.readFileSync(`${__dirname}/input.txt`, 'utf8')
 const lines = raw.split('\n')
 const input = lines.map(line => {
   return {
@@ -21,7 +21,7 @@ const doTheDew = (input) => {
     for (let ix = value.x; ix < (value.x + value.w); ix++) {
       for (let iy = value.y; iy < (value.y + value.h); iy++) {
         let square = `${ix},${iy}`
-        seen.has(square) ? overlaps.add(square) : seen.add(square)
+        seen.has(square) ? overlaps.add(square) : seen.add(square) 
       }
     }
   }
@@ -29,3 +29,4 @@ const doTheDew = (input) => {
 }
 
 console.log('Overlapping inches: ', doTheDew(input))
+module.exports = input
