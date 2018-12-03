@@ -1,4 +1,7 @@
 # Advent-of-Code-2018
 My solutions
 
-Ran in browser dev tools console, done on firefox.
+1. Firefox console.
+2. Firefox console.
+3. Node
+4. Node
