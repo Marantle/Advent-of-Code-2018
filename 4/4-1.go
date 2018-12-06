@@ -53,9 +53,9 @@ func main() {
 
 	for _, line := range moments {
 
+		fmt.Println(line.Msg)
 		if strings.Contains(line.Msg, "begins shift") {
-			guards[line.Msg] = line.Msg
-			fmt.Println(line.Msg)
+			// guards[line.Msg] = line.Msg
 		}
 	}
 }
