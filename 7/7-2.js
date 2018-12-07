@@ -8,7 +8,7 @@ Array.prototype.flatMap = function(f) {
 }
 
 const fs = require('fs')
-const input = fs.readFileSync(`${__dirname}/input2.txt`, 'utf8').split('\n')
+const input = fs.readFileSync(`${__dirname}/input.txt`, 'utf8').split('\n')
 // END boring part
 
 // split to objects
@@ -30,14 +30,11 @@ const stepRequirements = [...stepIds].map(stepId => {
   return { stepId, requires }
 })
 let currentSecond = 0
-const workerCount = 5
-const workers = [
-  { name: 'worker1', workingUntil: 0, workingOn: '' },
-  { name: 'worker2', workingUntil: 0, workingOn: '' },
-  { name: 'worker3', workingUntil: 0, workingOn: '' },
-  { name: 'worker4', workingUntil: 0, workingOn: '' },
-  { name: 'worker5', workingUntil: 0, workingOn: '' },
-]
+const workerCount = [1, 2, 3, 4, 5]
+
+const workers = workerCount.map(i => {
+  return { name: `worker${i}`, workingUntil: 0, workingOn: '' }
+})
 
 // do the thing
 while (doneSteps.length < stepIds.size) {
@@ -56,7 +53,7 @@ while (doneSteps.length < stepIds.size) {
   const completableIds = []
   stepIds.forEach(stepId => {
     const stepRequirement = stepRequirements.find(s => s.stepId === stepId)
-      .requires //?
+      .requires
     if (
       !doneSteps.includes(stepId) &&
       (stepRequirement.length === 0 ||
@@ -72,17 +69,18 @@ while (doneSteps.length < stepIds.size) {
     const worker = workers.find(w => w.workingUntil <= currentSecond)
     const stepToWorkOn = completableIds.shift()
     if (!workers.find(w => w.workingOn === stepToWorkOn)) {
-      console.log(`${worker.name} begin work on ${stepToWorkOn} at ${currentSecond}`)
-      const workDuration = stepToWorkOn.charCodeAt(0) - 64
+      console.log(
+        `${worker.name} begin work on ${stepToWorkOn} at ${currentSecond}`
+      )
+      const workDuration = stepToWorkOn.charCodeAt(0) - 4
       worker.workingUntil = currentSecond + workDuration
       worker.workingOn = stepToWorkOn
     }
   }
   currentSecond++
-  // console.log(JSON.stringify(workers.filter(), null, 2))
 }
 console.log(
-  `part 1answer is: ${JSON.stringify(
+  `part 1 answer is: ${JSON.stringify(
     doneSteps.reduce((a, v) => `${a}${v}`),
     null,
     2
