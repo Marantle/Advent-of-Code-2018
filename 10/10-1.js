@@ -15,13 +15,10 @@ const getNextArea = coord => {
 }
 
 function setup() {
-  fetch('input2.txt')
+  fetch('input.txt')
     .then(r => r.text())
     .then(data => {
-      data = data
-        .trim()
-        .split('\n')
-        .map(line => {
+      data = data.trim().split('\n').map(line => {
           let [x, y, vx, vy] = line.match(/-?\d+/g).map(Number)
           return { x, y, vx, vy }
         })
