@@ -1,4 +1,4 @@
-const input = 18;
+const input = 1308;
 const gridSize = 300;
 const powerLevels = {}
 for (let x = 1; x <= gridSize; x++) {
@@ -45,11 +45,9 @@ function getMaximumPower(beginX, beginY, powerLevels) {
   while (currentMaxX < gridSize && currentMaxY < gridSize) {
     for (; currentX <= currentMaxX; currentX++) {
       powerAccumulator += powerLevels[currentX][currentMaxY]
-      // console.log(`added ${currentX}, ${currentMaxY}`)
     }
     for (; currentY < currentMaxY; currentY++) {
       powerAccumulator += powerLevels[currentMaxX][currentY]
-      // console.log(`added ${currentMaxX}, ${currentY}`)
     }
     if (highestPower < powerAccumulator) {
       highestSize = `${currentMaxX - beginX + 1}`
@@ -59,8 +57,6 @@ function getMaximumPower(beginX, beginY, powerLevels) {
     currentMaxY++
     currentX = beginX
     currentY = beginY
-    // console.log('end')
-    // if (currentMaxX > 4) break;
   }
   return {
     highestPower,
